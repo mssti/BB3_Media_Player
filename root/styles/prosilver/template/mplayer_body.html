@@ -1,0 +1,467 @@
+<!-- IF BB3_POPUP -->
+<!-- DEFINE $BB3_POPUP = 1 -->
+<!-- INCLUDE simple_header.html -->
+<!-- ELSE -->
+<!-- DEFINE $BB3_POPUP = 0 -->
+<!-- INCLUDE overall_header.html -->
+<!-- ENDIF -->
+
+<!--
+	 _ __ ___   _____ _____ _____  _       ___   ___   _ __ ___  
+	| '_ ' _ \ / ___// ___/|__ __||_|     /  _| / _ \ | '_ ' _ \ 
+	| | | | | |\___ \\___ \  | |  | |  _  | |_ | |_| || | | | | |
+	|_| |_| |_|/____//____/  |_|  |_| |_| \___| \___/ |_| |_| |_|
+
+//-->
+
+<!-- MOD : AMEISEZ BB3 MediaPlayer (v0.0.8) - START //-->
+
+<style type="text/css">
+.postbody		{                     vertical-align: top; margin: 5px 0 0 0; padding: 5px 0 0 0; <!-- IF $BB3_POPUP -->width: 100%;<!-- ENDIF --> }
+#BB3_player		{ text-align: center; vertical-align: top; margin: 0   0 0 0; padding: 0   0 0 0; width: 100%; border: none; }
+#BB3_Loading	{ text-align: center;                                                             width: 100%; position: relative; background-color: transparent; }
+label           { font-size: 1.00em; text-align: left; font-weight: bold; color: #4A5A73; }
+/* #BB3_Search              { display: none; } */
+#BB3_Ajax_Loading_Img    { position: relative; top: 5px; }
+#BB3_Ajax_Result         { height: 317px; overflow: auto; display: none; }
+#BB3_Ajax_Result table   { width: 100%; border: 1px solid #CCCFD3; background-color: #FFFFFF; padding: 1px; }
+#BB3_Ajax_Result td      { text-align: left; font-size: 1em; padding: 4px; line-height: 1.20em; vertical-align: top; }
+#BB3_Ajax_Result td img  { width: 40px; float: left; padding: 0 5px 0 0; }
+#BB3_Ajax_Result td.h    { padding: 3px 4px; color: #FFFFFF; background-color: #70AED3; text-align: left; font-size: 1em; text-transform: uppercase; }
+#BB3_Ajax_Result td.h a  { font-weight: bold; color: #FFFFFF; }
+#BB3_Ajax_Result .col1   { background-color: #DCEBFE; }
+#BB3_Ajax_Result .col2   { background-color: #F9F9F9; }
+</style>
+
+<h2>{L_BB3_PLAYER_NAME}<!-- (v{VERSION}) --></h2>
+<div class="panel bg3">
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<div class="inner">
+			<div class="postbody">
+				<div id="BB3_player"><br />{L_BB3_FLASH_NOTE}</div>
+				<div id="BB3_Loading"><img src="{BB3_FOLDER_PATH}bb3player_loading.gif" alt="" title=""/></div>
+				<script type="text/javascript" src="{BB3_FOLDER_PATH}swfobject_v1_5_1.js"></script>
+				<script type="text/javascript">
+				// <![CDATA[
+					/**
+					* @ignore
+					* Some useful link : 
+					*	http://blog.deconcept.com/swfobject/swfobject_source.js
+					*	http://developer.longtailvideo.com/trac/wiki/Player5FlashVars#Playlistproperties
+					**/
+
+					/** Preload images **/
+					var preload_image_array = new Array( "{BB3_FOLDER_PATH}bb3player_loading.gif", "{BB3_IMAGE_PATH}" );
+					var preload_image_object = new Image();
+					for( i = 0, pi = preload_image_array.length; i < pi; i++ ) { preload_image_object.src = preload_image_array[i]; }
+
+					var loading = document.getElementById('BB3_Loading');
+					
+					var so = new SWFObject('{BB3_FOLDER_PATH}player_4.4.swf', 'BB3_player_ID', <!-- IF $BB3_POPUP -->'825'<!-- ELSE -->'905'<!-- ENDIF -->, '410', '9.0.124');
+					
+					so.addParam('allowscriptaccess',	'always');
+					so.addParam('allowfullscreen',		'true');
+					so.addParam('wmode',				'opaque');
+
+					so.addVariable('frontcolor',		'ffffff');	/* text, buttons, slider */
+					so.addVariable('lightcolor',		'ff0000');	/* Mouseover, volume */
+					so.addVariable('backcolor',			'555555');	/* background navigation bar, playlist */
+					so.addVariable('screencolor',		'555555');	/* background Video, audio */
+					so.addVariable('screenalpha',		'0');
+
+					if ('{ATTACH}')
+					{
+						so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}playlist.{PHP_EX}?image={BB3_IMAGE_PATH}&path=attach'));
+					}
+					else
+					{
+						so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}playlist.{PHP_EX}?image={BB3_IMAGE_PATH}&path={BB3_UPLOAD_PATH}'));
+					}
+					so.addVariable('volume',			'80');
+					so.addVariable('autostart',			'false');
+
+					so.addVariable('playlistsize',		<!-- IF $BB3_POPUP -->'300'<!-- ELSE -->'400'<!-- ENDIF -->);
+					so.addVariable('playlist',			'right');
+					so.addVariable('autoscroll',		'true');
+					so.addVariable('playlist.thumbs',	'true');
+					so.addVariable('repeat',			'list');
+				/*	so.addVariable('bufferlength',		'20'); */
+				/*	so.addVariable('bandwidth',			'10000'); */
+
+				/*	so.addVariable('skin',				'stylish_slim'); */
+					so.addVariable('overstretch',		'fit');
+					so.addVariable('image',				'{BB3_IMAGE_PATH}');
+					so.addVariable('shownavigation',	'true');
+					so.addVariable('showicons',			'true');
+					so.addVariable('showdigits',		'true');
+					so.addVariable('showstop',			'true');
+					so.addVariable('showdownload',		'true');
+
+					so.addVariable('searchbar',			'true');
+				/*	so.addVariable('showeq',			'true'); */
+
+					/** Load specific file **/
+					if ('{BB3_INIT_FILE}' !== '')
+					{
+						so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}{BB3_INIT_FILE}'));
+						so.addVariable('autostart','true');
+						loading.style.display = 'none';
+					}
+
+					/** Load specific item in a playlist **/
+					if ({BB3_INIT_ITEM} != 0)
+					{
+						so.addVariable('item', {BB3_INIT_ITEM} - 1);
+						so.addVariable('autostart','true');
+					}
+
+					function playerInit()
+					{
+						so.write('BB3_player');
+						/* 230 = (410 (height of the player) / 2) + 15 (height of the spinner image) */
+						loading.style.top = '-230px';
+					}
+
+					var player;
+					function playerReady(thePlayer)
+					{
+						player = document.getElementById(thePlayer.id);
+						player.addControllerListener('PLAYLIST', 'playlistHandler');
+					}
+
+					/** manipulate playlist here. **/
+					function playlistHandler(playlist)
+					{
+						var list = player.getPlaylist();
+						var display	= document.getElementById('BB3_NumText');
+						if (list != 'undefined' && display)
+						{
+							display.innerHTML = list.length;
+						}
+						loading.style.top = '-9999px';
+					}
+
+					<!-- IF YOUTUBE_SEARCH -->
+					function youtube_search()
+					{
+						if (so.getVariable('plugins') == 'yousearch-1')
+						{
+							so.addVariable('plugins', '');
+						}
+						else
+						{
+							so.addVariable('plugins', 'yousearch-1');
+						}
+				  		playerInit();
+					}
+			  		<!-- ENDIF -->
+
+					function playlist_change(name)
+					{
+						switch(name)
+						{
+							default :
+							//	so.addVariable('file', encodeURIComponent(name));
+								so.addVariable('file', encodeURIComponent("{BB3_FOLDER_PATH}search_playlist.{PHP_EX}?keywords='" + name + "'&file=1"));
+							//	so.addVariable('autostart', 'true');
+								break;
+
+							<!-- BEGIN myyoutube -->
+							case '{myyoutube.PLAYLIST_NAME}' : 
+								so.addVariable('file', encodeURIComponent('{myyoutube.PLAYLIST_URL}'));
+							//	so.addVariable('autostart', 'false');
+								break;
+							<!-- END myyoutube -->
+
+							<!-- BEGIN youtube -->
+							case '{youtube.PLAYLIST_NAME}' : 
+								so.addVariable('file', encodeURIComponent('{youtube.PLAYLIST_URL}'));
+							//	so.addVariable('autostart', 'false');
+								break;
+							<!-- END youtube -->
+
+							<!-- BEGIN dailymotion -->
+							case '{dailymotion.PLAYLIST_NAME}' : 
+								so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}dailymotion.{PHP_EX}?rssfeed={dailymotion.PLAYLIST_URL}'));
+							//	so.addVariable('autostart', 'false');
+								break;
+							<!-- END dailymotion -->
+
+							<!-- BEGIN google -->
+							case '{google.PLAYLIST_NAME}' : 
+								so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}google.{PHP_EX}?rssfeed={google.PLAYLIST_URL}'));
+							//	so.addVariable('autostart', 'false');
+								break;
+							<!-- END google -->
+
+							<!-- BEGIN attach -->
+							case '{attach.PLAYLIST_NAME}' : 
+								so.addVariable('file', encodeURIComponent('{attach.PLAYLIST_URL}'));
+							//	so.addVariable('autostart', 'true');
+								break;
+							<!-- END attach -->
+						}
+						playerInit();
+						loading.style.top = '-9999px';
+
+						return true;
+					}
+
+					function skin_factory(name)
+					{
+						so.addVariable('skin','skin/' + name);
+				  		playerInit();
+					}
+
+					function playlist_factory(name)
+					{
+						if (name == 'attach')
+						{
+							so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}playlist.{PHP_EX}?image={BB3_IMAGE_PATH}&path=attach'));
+						}
+						else
+						{
+							so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}playlist.{PHP_EX}?image={BB3_IMAGE_PATH}&path={BB3_UPLOAD_PATH}/' + name));
+						}
+				  		playerInit();
+					}
+
+				<!-- IF BB3_SEARCH -->
+					function toggle_search(s)
+					{
+						var el_search_div	 = document.getElementById('BB3_Search');
+						var el_search_button = document.getElementById('BB3_Search_Button');
+
+						if (!s)
+						{
+							s = (el_search_div.style.display == '' || el_search_div.style.display == 'block') ? -1 : 1;
+						}
+
+						el_search_div.style.display = (s == 1) ? 'block' : 'none';
+						el_search_button.value  = (s == 1) ? '{LA_BB3_SEARCH_HIDE}' : '{LA_BB3_SEARCH_SHOW}';
+
+						if (s == 1) { document.getElementById('BB3_Keywords').focus(); }
+
+					<!-- IF BB3_SEARCH_AJAX -->
+						AjaxMedia_indicator('off');
+
+						if (s== -1)
+						{
+							var bb3_ajax_result = document.getElementById('BB3_Ajax_Result');
+							bb3_ajax_result.style.display = 'none';
+						}
+					<!-- ENDIF -->
+						return false;
+					}
+
+					function playlist_search(keywords)
+					{
+						if (!keywords)
+						{
+							var keywords = document.getElementById('BB3_Keywords').value;
+						}
+
+						if (keywords == '')
+						{
+							return false;
+						}
+
+						<!-- IF not BB3_SEARCH_AJAX -->
+							so.addVariable('file', encodeURIComponent("{BB3_FOLDER_PATH}search_playlist.{PHP_EX}?keywords='" + keywords + "'"));
+					  		playerInit();
+				  		<!-- ELSE -->
+				  			AjaxMedia_send(keywords);
+				  		<!-- ENDIF -->
+					}
+
+					<!-- IF BB3_SEARCH_AJAX -->
+					var AjaxMedia_xmlHttp = AjaxMedia_object();
+
+					function AjaxMedia_object()
+					{
+						if (window.XMLHttpRequest)
+						{
+							return new XMLHttpRequest();
+						}
+						else if (window.ActiveXObject)
+						{
+							return new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						else
+						{
+							document.getElementById('BB3_Loading').innerHTML += 'Status: Cound not create XmlHttpRequest Object. Consider upgrading your browser.';
+						}
+					}
+
+					function AjaxMedia_send(keywords)
+					{
+						AjaxMedia_indicator('on');
+						if (AjaxMedia_xmlHttp.readyState == 4 || AjaxMedia_xmlHttp.readyState == 0)
+						{
+							AjaxMedia_param = "keywords=" + keywords;
+							AjaxMedia_xmlHttp.open('POST', 'search_playlist.{PHP_EX}', true);
+							AjaxMedia_xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+							AjaxMedia_xmlHttp.onreadystatechange = AjaxMedia_return;
+							AjaxMedia_xmlHttp.send(AjaxMedia_param);
+						}
+					}
+
+					function AjaxMedia_return()
+					{
+						if (AjaxMedia_xmlHttp.readyState == 4)
+						{
+							document.getElementById('BB3_Ajax_Result').innerHTML = AjaxMedia_xmlHttp.responseText;
+							AjaxMedia_indicator('off');
+						}
+					}
+
+					function AjaxMedia_indicator(mode)
+					{
+						if (document.getElementById('BB3_Ajax_Loading_Img'))
+						{
+							document.getElementById('BB3_Ajax_Loading_Img').style.visibility = (mode == 'on') ? 'visible' : 'hidden';
+						}
+
+						var bb3_ajax_result = document.getElementById('BB3_Ajax_Result');
+						if (bb3_ajax_result)
+						{
+							bb3_ajax_result.style.display = (bb3_ajax_result.innerHTML != '') ? 'block' : 'none';
+						}
+					}
+
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+
+					/** Install the safety net to initiate the player - START **/
+					if (window.onload_functions) /* prosilver */
+					{
+						onload_functions[onload_functions.length] = "playerInit();";
+						<!-- IF BB3_SEARCH -->onload_functions[onload_functions.length] = "toggle_search()";<!-- ENDIF -->
+					}
+					else if (typeof(window.addEventListener) != "undefined") /* DOM */
+					{
+						window.addEventListener("load", playerInit, false);
+						<!-- IF BB3_SEARCH -->window.addEventListener("load", toggle_search, false);<!-- ENDIF -->
+					}
+					else if (typeof(window.attachEvent) != "undefined") /* MSIE */
+					{
+						window.attachEvent("onload", playerInit);
+						<!-- IF BB3_SEARCH -->window.attachEvent("onload", toggle_search, false);<!-- ENDIF -->
+					}
+					/** Install the safety net to initiate the player - END **/
+				// ]]>
+				</script>
+			</div>
+			<!-- PLAYER EMBEDDING - END //-->
+
+			<form id="BB3_Options" method="post" action="{U_ACTION}">
+			<!-- IF $BB3_POPUP -->
+			<hr style="border-top: 1px solid #cccccc;"/>
+			<div class="column1">
+				<dl>
+			<!-- ELSE -->
+				<dl class="postprofile">
+			<!-- ENDIF -->
+					<dt>
+						<label>{L_BB3_PLAYLIST_NUMBER} : <span id="BB3_NumText">&nbsp;</span></label>
+					</dt>
+
+					<!-- IF BB3_SKIN_OPTIONS -->
+					<dd>
+						<br /><label for="BB3_Skin">{L_BB3_SKIN_OPTIONS}</label>
+						<br /><select id="BB3_Skin" name="BB3_Skin" onchange="if(this.options[this.selectedIndex].value != -1){ skin_factory(this.options[selectedIndex].value); } return false;">{BB3_SKIN_OPTIONS}</select>
+					</dd>
+					<!-- ENDIF -->
+
+					<!-- IF BB3_FOLDER_OPTIONS -->
+					<dd>
+						<br /><label for="BB3_Path">{L_BB3_PLAYLIST_OPTIONS}</label>
+						<br /><select id="BB3_Path" name="BB3_Path" onchange="if(this.options[this.selectedIndex].value != -1){ playlist_factory(this.options[selectedIndex].value); } return false;">{BB3_FOLDER_OPTIONS}</select>
+					</dd>
+					<!-- ENDIF -->
+
+					<!-- IF ATTACH_PLAYLIST -->
+					<dd>
+						<br /><label for="BB3_Attach_Playlist">{L_BB3_ATTACH_PLAYLIST}</label>
+						<br /><select id="BB3_Attach_Playlist" name="BB3_Attach_Playlist" onchange="if(this.options[this.selectedIndex].value != -1){ playlist_change(this.options[selectedIndex].value); } return false;">
+							<option class="sep" value="-1" selected="selected" disabled="disabled">{L_SELECT}</option>
+							<!-- IF ATTACH_PLAYLIST --><optgroup id="BB3_Attachment_Playlist" label="{L_BB3_ATTACH_PLAYLIST}">{ATTACH_PLAYLIST}</optgroup><!-- ENDIF -->
+						</select>
+					</dd>
+					<!-- ENDIF -->
+
+					<!-- IF YOUTUBE_MYPLAYLIST or YOUTUBE_PLAYLIST or DAILYMOTION_PLAYLIST or GOOGLE_PLAYLIST -->
+					<dd>
+						<br /><label for="BB3_Playlist">{L_BB3_EXPLAYLIST_OPTIONS}</label>
+						<br /><select id="BB3_Playlist" name="BB3_Playlist" onchange="if(this.options[this.selectedIndex].value != -1){ playlist_change(this.options[selectedIndex].value); } return false;">
+							<option class="sep" value="-1" selected="selected" disabled="disabled">{L_SELECT}</option>
+							<!-- IF YOUTUBE_MYPLAYLIST --><optgroup id="myyoutube_playlist" label="{L_BB3_YOUTUBE_MYPLAYLIST}">{YOUTUBE_MYPLAYLIST}</optgroup><!-- ENDIF -->
+							<!-- IF YOUTUBE_PLAYLIST --><optgroup id="youtube_playlist" label="{L_BB3_YOUTUBE_PLAYLIST}">{YOUTUBE_PLAYLIST}</optgroup><!-- ENDIF -->
+							<!-- IF DAILYMOTION_PLAYLIST --><optgroup id="dailymotion_playlist" label="{L_BB3_DAILYMOTION_PLAYLIST}">{DAILYMOTION_PLAYLIST}</optgroup><!-- ENDIF -->
+							<!-- IF GOOGLE_PLAYLIST --><optgroup id="google_playlist" label="{L_BB3_GOOGLE_PLAYLIST}">{GOOGLE_PLAYLIST}</optgroup><!-- ENDIF -->
+						</select>
+					</dd>
+					<!-- ENDIF -->
+
+					<!-- IF YOUTUBE_SEARCH -->
+					<dd>
+						<br /><input class="button2" type="submit" value="{L_BB3_YOUTUBE_SEARCH}" onclick="javascript:youtube_search(); return false;"/>
+					</dd>
+					<!-- ENDIF -->
+
+					<!-- IF BB3_SEARCH -->
+					<dd>
+						<br /><input id="BB3_Search_Button" class="button2" value="{L_BB3_SEARCH_SHOW}" type="submit" onclick="toggle_search(); return false;" /><br />
+						<div id="cp-main" style="float: none; <!-- IF $BB3_POPUP -->width: 400px;<!-- ELSE -->width: 100%;<!-- ENDIF -->">
+							<div id="BB3_Search" class="panel">
+								<div class="inner"><span class="corners-top"><span></span></span>
+									<dl>
+										<dt><label for="BB3_Keywords">{L_SEARCH_KEYWORDS}:</label></dt>
+										<dd><input type="text" class="inputbox" name="BB3_Keywords" id="BB3_Keywords" size="40" title="{L_SEARCH_KEYWORDS}" /></dd>
+										<dd><input type="submit" name="submit" value="{L_SEARCH}" class="button1" onclick="playlist_search(this.form.BB3_Keywords.value); return false;" /><!-- IF BB3_SEARCH_AJAX --> <img src="{BB3_FOLDER_PATH}bb3player_loading.gif" alt="" title="" id="BB3_Ajax_Loading_Img" /><!-- ENDIF --></dd>
+									</dl>
+									<br /><span>{L_SEARCH_KEYWORDS_EXPLAIN}</span>
+								<span class="corners-bottom"><span></span></span></div>
+							</div>
+						</div>
+					</dd>
+					<!-- IF BB3_SEARCH_AJAX and not $BB3_POPUP -->
+					<dd>
+						<div id="BB3_Ajax_Result"></div>
+					</dd>
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+				</dl>
+
+			<!-- IF $BB3_POPUP -->
+			</div>
+			<div class="column2">
+				<div id="BB3_Ajax_Result"></div>
+			</div>
+			<br style="clear: both;" />
+			<!-- ENDIF -->
+				<br />
+			</form>
+		</div>
+		
+	<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<!-- MOD : AMEISEZ BB3 MediaPlayer (v0.0.8) - END //-->
+
+<!-- IF not BB3_POPUP -->
+	<!-- INCLUDE jumpbox.html -->
+
+	<!-- IF S_DISPLAY_ONLINE_LIST -->
+		<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
+		<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+		<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- IF BB3_POPUP -->
+<!-- INCLUDE simple_footer.html -->
+<!-- ELSE -->
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

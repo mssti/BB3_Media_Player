@@ -1,0 +1,65 @@
+<rss version="2.0" 
+	xmlns:media="{LINK_TO_YOU}"
+	xmlns:jwplayer="http://developer.longtailvideo.com/trac/wiki/FlashFormats">
+<!-- EXAMPLE 
+<rss version="2.0" 
+	xmlns:media="http://www.mssti.com/"
+	xmlns:jwplayer="http://developer.longtailvideo.com/trac/wiki/FlashFormats">
+-->
+	<channel>
+		<title>{FEED_TITLE}</title>
+		<!-- EXAMPLE 
+		<title>My Own Play List</title>
+		-->
+		<item>
+			<title>{ITEM_TITLE}</title>
+			<link>{ITEM_LINK}</link>
+			<description>{ITEM_DESRIPTION}</description>
+			<pubDate>{ITEM_DATE_IN_RFC2822_FORMAT}</pubDate>
+			<media:content url="{ITEM_FILE_LINK.FLV/MP3}" duration="{ITEM_DURATION}"/>
+			<media:thumbnail url="{ITEM_IMAGE_LINK}" />
+		</item>
+
+		<item>
+			<title>Como dos extraños</title>
+			<link>http://www.musicamp3.com/download/canciones/23082_25642_55151.mp3</link>
+			<description>Tango 1940<br />Música: Pedro Laurenz<br />Letra: José María Contursi<br />Artista: La Yumba Tango<br />http://www.musicamp3.com/01223082/La_Yumba_Tango/</description>
+			<pubDate>Mon, 22 Dec 2008 06:42:47 -0200</pubDate>
+			<media:content url="http://www.musicamp3.com/download/canciones/23082_25642_55151.mp3/La_Yumba_Tango_Como_dos_extra%C3%B1os__Como_dos_extra%C3%B1os_.mp3&type=mp3" duration="0"/>
+			<media:thumbnail url="http://www.musicamp3.com/images/imagesalbum/23082_25642.JPG"/>
+		</item>
+
+
+		<!-- MP3 Example 2
+		<item>
+			<title>Cake_I_Will_Survive.mp3</title>
+			<link>http://www.mssti.com/phpbb3/mplayer/media/audio/Cake_I_Will_Survive.mp3</link>
+			<description>Example of mp3 file at www.mssti.com</description>
+			<pubDate>Mon, 22 Dec 2008 06:42:47 -0200</pubDate>
+			<media:content url="http://www.mssti.com/phpbb3/mplayer/media/audio/Cake_I_Will_Survive.mp3" duration="0"/>
+			<media:thumbnail url="http://www.mssti.com/phpbb3/mplayer/media/audio/albumart.jpg"/>
+		</item>
+		-->
+		<!-- FLV Example 1
+		<item>
+			<title>Knight Rider trailer</title>
+			<link>http://tvmovies.ign.com/tv/video/article/850/850894/knightrider_trailer_020808_flvlow.flv</link>
+			<description>Example of .flv file at tvmovies.ign.com</description>
+			<pubDate>Mon, 22 Dec 2008 06:42:47 -0200</pubDate>
+			<media:content url="http://tvmovies.ign.com/tv/video/article/850/850894/knightrider_trailer_020808_flvlow.flv" duration="0"/>
+			<media:thumbnail url="http://media.ign.com/games/image/object/006/006925/KnightRider_NES_USboxart_160w.jpg"/>
+		</item>
+		-->
+
+		<!-- FLV Example 2
+		<item>
+			<title>vampiresassistant_trl2_320.flv</title>
+			<link>http://www.mssti.com/phpbb3/mplayer/media/video/trailers/vampiresassistant_trl2_320.flv</link>
+			<description>Example of .flv file at www.mssti.com</description>
+			<pubDate>Mon, 22 Dec 2008 06:42:47 -0200</pubDate>
+			<media:content url="http://www.mssti.com/phpbb3/mplayer/media/video/trailers/vampiresassistant_trl2_320.flv" duration="0"/>
+			<media:thumbnail url="http://www.mssti.com/phpbb3/mplayer/media/video/albumart.gif"/>
+		</item>
+		-->
+	</channel>
+</rss>

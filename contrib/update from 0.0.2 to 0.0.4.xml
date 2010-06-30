@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[update from 0.0.2 to 0.0.4.xml]]></title>
+		<description lang="en"><![CDATA[Adds a JW FLV player in the Media Player page that captures all supported media (by default flv, mp3) stored on phpbb_root/mplayer/media including sub folders and display it as one playlist playable in the Media player page]]></description>
+		<author-notes lang="en"><![CDATA[DELETE ALL PREVIOUS BB3 MEDIA PLAYER FILE BEFORE PROCEEDING TO UPDATE INSTRUCTIONS
+1. DELETE phpbbroot/mplayer*.*
+2. DELETE phpbbroot/language/en/mods/bb3_media_player.php
+3. DELETE phpbbroot/styles/prosilver/template/mplayer_body.html
+4. DELETE phpbbroot/styles/prosilver/theme/images/icon_mplayer.gif
+
+This MOD uses JW Player v3.14 (current version is v4.5) from www.longtailvideo.com. It requires license if to be installed on a commercial site]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[ameisez]]></realname>
+				<username><![CDATA[ameisez]]></username>
+				<homepage><![CDATA[http://www.littlegraffyx.com/ameisez]]></homepage>
+				<email><![CDATA[ameisez@yahoo.com]]></email>
+			</author>
+			<author>
+				<realname><![CDATA[Gabriel]]></realname>
+				<username><![CDATA[leviatan21]]></username>
+				<homepage><![CDATA[http://www.mssti.com]]></homepage>
+				<email><![CDATA[info@mssti.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>0.0.4</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.5</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2009-09-29</date>
+				<rev-version>0.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Beta Release]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-09-30</date>
+				<rev-version>0.0.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[CLEANUP: add header links the proper way]]></change>
+					<change><![CDATA[TEMPLATE: add subsilver2 support]]></change>
+					<change><![CDATA[FIXED: remove hard coded website]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-04</date>
+				<rev-version>0.0.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[FEATURE: auto detect install folder]]></change>
+					<change><![CDATA[FEATURE: auto playlist generation for every folder inside media folder]]></change>
+					<change><![CDATA[FEATURE: MSSTI Upload Toolkit compatible]]></change>
+					<change><![CDATA[CLEANUP: remove unnecessary files]]></change>
+					<change><![CDATA[FIX: display preview image by default]]></change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="template" href="subsilver2.xml" lang="en">subsilver2 template edits</link>
+			<link type="parent" href="../install_mod.xml" lang="en">Main Install File</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/mplayer/*.*" to="mplayer/*.*"/>
+			<file from="root/language/en/mods/bb3_media_player.php" to="language/en/mods/bb3_media_player.php"/>
+			<file from="root/styles/prosilver/template/mplayer_body.html" to="styles/prosilver/template/mplayer_body.html"/>
+			<file from="root/styles/prosilver/theme/images/icon_mplayer.gif" to="styles/prosilver/theme/images/icon_mplayer.gif"/>
+		</copy>
+		<diy-instructions lang="en"><![CDATA[1. Upload files to your forum.
+2. Upload your media files to phpbbroot/mplayer/media
+3. Purge the template cache from ACP      
+4. Purge the theme cache from ACP      
+5. Enjoy the Mod!!]]></diy-instructions>
+	</action-group>
+</mod>

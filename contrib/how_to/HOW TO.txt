@@ -1,0 +1,58 @@
+How to update from V.0.0.7
+1. copy all files to designated location ovewriting all old files
+
+How to upload media files
+1. All media files must be uploaded to root/mplayer/media/
+
+
+=======================
+How to use NEW Features
+=======================
+How to start the player and load specific folder within the media folder
+========================================================================
+#
+#---- [ OPEN ] ----
+#
+root/styles/THE_STYLE_NAME/template/overall_header.html
+#
+#---- [ FIND ] ----
+#
+<li class="icon-player"><a href="{U_BB3_PLAYER}" title="{L_BB3_PLAYER_EXPLAIN}">{L_BB3_PLAYER}</a></li>
+#
+#---- [ INLINE FIND ] ----
+#
+{U_BB3_PLAYER}
+#
+#---- [ REPLACE WITH] ----
+#
+{ROOT_PATH}mplayer/media/index.php?path=[your start folder]
+#
+#-----------END-----------
+
+Example1: {ROOT_PATH}mplayer/media/index.php?path=audio/lovesong
+Result of Example: Your media player will start loading mplayer/media/audio/lovesong
+Example2: {ROOT_PATH}mplayer/media/index.php?path=audio/lovesong&item=3
+Result of Example: Your media player will start loading mplayer/media/audio/lovesong item number 3
+------------------------------------------------------------------------
+
+
+How to change mPlayer behavior
+==============================
+#
+#---- [ OPEN ] ----
+#
+root/mplayer/functions_mplayer.php
+#
+FIND Each line below and change setting to your liking. 
+
+'force_Download'		=> true,
+'xml_playlist'			=> true,
+'search'			=> true,
+'search_ajax'			=> true, (set this to false to use playlist search)
+'attach_playlist'		=> true, (note: permission is not applied. all supported attachments will be visible in mplayer if this is enabled)
+'attach_separate'		=> false, (will display another playlist for attach media
+'youtube_search'		=> true,
+'youtube_myplaylist'		=> true, 
+
+
+

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[[BETA] ameisez - BB3 Media Player]]></title>
+		<description lang="en"><![CDATA[Adds JW FLV player in the Media Player page that captures all supported media (by default flv, mp3) stored on root/mplayer/media including sub folders and display it as one playlist playable in the Media player page]]></description>
+		<author-notes lang="en"><![CDATA[This MOD uses JW Player 4.4 from www.longtailvideo.com. It requires license if to be installed on a commercial site]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[ameisez]]></realname>
+				<username><![CDATA[ameisez]]></username>
+				<homepage><![CDATA[http://www.littlegraffyx.com/ameisez]]></homepage>
+				<email><![CDATA[ameisez@yahoo.com]]></email>
+			</author>
+			<author>
+				<realname><![CDATA[Gabriel]]></realname>
+				<username><![CDATA[leviatan21]]></username>
+				<homepage><![CDATA[http://www.mssti.com]]></homepage>
+				<email><![CDATA[info@mssti.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>0.0.8</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.7-PL1</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2009-09-29</date>
+				<rev-version>0.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Beta Release]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-09-30</date>
+				<rev-version>0.0.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[FIXED: remove hard coded website]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-04</date>
+				<rev-version>0.0.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[FIX: display preview image by default]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-07</date>
+				<rev-version>0.0.5</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Selectable skins]]></change>
+					<change><![CDATA[Selectable playlist and external playlist]]></change>
+					<change><![CDATA[if a folder have a file named "albumart.jpg" use it as default image]]></change>
+					<change><![CDATA[if a file (mp3 or flv) have a picture named with the same name with "jpg" extension, use it as default image ( and thumbnail in playlist )]]></change>
+					<change><![CDATA[Added Youtube search for video name]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-14</date>
+				<rev-version>0.0.6</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Added Security checks]]></change>
+					<change><![CDATA[Added ID3, it will display ( as description ) some information about the mp3 file]]></change>
+					<change><![CDATA[Added more skins]]></change>
+					<change><![CDATA[Added "who's on line" to prosilver styles]]></change>
+					<change><![CDATA[Playlist now display videos from Google]]></change>
+					<change><![CDATA[Playlist now display videos from Youtube]]></change>
+					<change><![CDATA[Playlist now display videos from Dailymoon]]></change>
+					<change><![CDATA[Playlist now display videos from Rutube]]></change>
+					<change><![CDATA[Playlist now display videos from Vimeo]]></change>
+					<change><![CDATA[Playlist now display videos from Metacafe]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-19</date>
+				<rev-version>0.0.7</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Multiple Custom Youtube video playlist]]></change>
+					<change><![CDATA[Multiple Youtube video playlist]]></change>
+					<change><![CDATA[Multiple Dailymotion video playlist]]></change>
+					<change><![CDATA[Multiple Google video playlist]]></change>
+					<change><![CDATA[Added spinner image while loading the script and play list items]]></change>
+					<change><![CDATA[Added "Number of items in the Current playlist"]]></change>
+					<change><![CDATA[Checks available external links before made it available]]></change>
+					<change><![CDATA[Added cache ( excluding youtube ) : play list are cached for 24 hrs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-03-22</date>
+				<rev-version>0.0.8</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Each playlist can be enable/disable individuall from the php file]]></change>
+					<change><![CDATA[Pop Up capability]]></change>
+					<change><![CDATA[Link to individual playlist]]></change>
+					<change><![CDATA[Link to individual item]]></change>
+					<change><![CDATA[All supported media attached on the forum is added as "Attached" in the playlist]]></change>
+					<change><![CDATA[Turn skin selector ON/OFF]]></change>
+					<change><![CDATA[Turn youtube search ON/OFF]]></change>
+					<change><![CDATA[Supports xml playlist that points to external media]]></change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="contrib" href="contrib/update from 0.0.1 to 0.0.4.xml" lang="en">update from 0.0.1 to 0.0.4</link>
+			<link type="template" href="contrib/update from 0.0.2 to 0.0.4.xml" lang="en">update from 0.0.2 to 0.0.4</link>
+			<link type="template" href="contrib/subsilver2.xml" lang="en">subsilver2 template edits</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/mplayer/*.*" to="mplayer/*.*"/>
+			<file from="root/language/en/mods/mplayer.php" to="language/en/mods/mplayer.php"/>
+			<file from="root/styles/prosilver/template/mplayer_body.html" to="styles/prosilver/template/mplayer_body.html"/>
+			<file from="styles/prosilver/theme/images/icon_mplayer.gif" to="prosilver/theme/images/icon_mplayer.gif"/>
+		</copy>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[		'U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),
+]]></find>
+				<action type="before-add"><![CDATA[		//-- mod : BB3 MEDIA PLAYER ----------------------------------------------------
+		//-- add
+		'U_BB3_PLAYER'          => append_sid("{$phpbb_root_path}mplayer/index.$phpEx"),
+		//-- fin mod : BB3 MEDIA PLAYER ------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA[	'BAN_TRIGGERED_BY_USER'	=> 'A ban has been issued on your username.',
+]]></find>
+				<action type="after-add"><![CDATA[	//-- mod : BB3 PLAYER ----------------------------------------------------
+	//-- add
+	'BB3_PLAYER'			=> 'BB3 Media Player',
+	'BB3_PLAYER_EXPLAIN'	=> 'BB3 Media Player',
+	//-- fin mod : BB3 PLAYER ------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_footer.html">
+			<edit>
+				<find><![CDATA[	<div class="copyright">Powered by <a href="http://www.phpbb.com/">phpBB</a> &copy; 2000, 2002, 2005, 2007 phpBB Group
+]]></find>
+				<action type="before-add"><![CDATA[   	<div class="copyright">Media Player Powered by <strong><a href="http://www.littlegraffyx.com/ameisez">BB3 Media Player</a></strong> &copy; 2009 <strong><a href="http://www.littlegraffyx.com/ameisez">Ameisez</a> | <a href="http://www.mssti.com/">MSSTI</a></strong>
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<find><![CDATA[       			<ul class="linklist rightside">
+]]></find>
+				<action type="after-add"><![CDATA[						<li class="icon-player"><a href="{U_BB3_PLAYER}" title="{L_BB3_PLAYER_EXPLAIN}">{L_BB3_PLAYER}</a></li>
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/buttons.css">
+			<edit>
+				<find><![CDATA[/* Icon images
+---------------------------------------- */
+.sitehome, .icon-faq, .icon-members, .icon-home, .icon-ucp, .icon-register, .icon-logout,
+]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[.icon-faq,]]></inline-find>
+				</inline-edit>
+				<action type="before-add"><![CDATA[.icon-player, ]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/colours.css">
+			<edit>
+				<find><![CDATA[/* Icon images
+---------------------------------------- */]]></find>
+				<action type="after-add"><![CDATA[.icon-player                  			{ background-image: url("{T_THEME_PATH}/images/icon_mplayer.gif"); }
+]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[1. Upload files to your forum.
+2. Upload your media files to root/mplayer/media
+3. Purge the template cache from ACP      
+4. Purge the theme cache from ACP      
+5. Enjoy the Mod!!
+
+NOTE: Settings can be enable/disable from functions_mplayer.php]]></diy-instructions>
+	</action-group>
+</mod>
