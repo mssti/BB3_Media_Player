@@ -1,0 +1,24 @@
+Welcome to the MSSTI Github repository for my MODs for phpBB3.
+
+******************************************************************************
+* Title :
+* BB3 Media Player Version 0.0.7
+******************************************************************************
+* Description:
+* Adds a JW FLV player in the Media Player page that captures all supported media (by default flv, mp3)
+* stored on phpbb_root/mplayer/media including sub folders and display it 
+* as one playlist playable in the Media player page
+******************************************************************************
+* Please keep in mind that this is still early in development, so not everything is in place or working.
+* It is not recommended that you install it on a live forum.
+* Let me know if you find anything broken, though, so I can take a look.
+* Also, good ideas and bug reports are always welcome.
+******************************************************************************
+* phpBB version: phpbb 3.0.5
+******************************************************************************
+* Requirements: JavaScript enabled
+******************************************************************************
+* License: GNU General Public License v2
+******************************************************************************
+* Before adding this MOD to your forum, you should back up all files related to this MOD.]
+******************************************************************************
