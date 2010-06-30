@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="./modx.prosilver.en.xsl" ?>
+<!--
+	NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.
+-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
+<header>
+	<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25" />
+	<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+	<title lang="en">[BETA] ameisez - BB3 Media Player</title>
+	<description lang="en">Adds a JW FLV player in the Media Player page that captures all supported media (by default flv, mp3) stored on phpbb_root/mplayer/media including sub folders and display it as one playlist playable in the Media player page</description>
+	<author-notes lang="en">This MOD uses JW Player 3.14 (current version is 4.5) from www.longtailvideo.com. It requires license if to be installed on a commercial site</author-notes>
+	<author-group>
+		<author>
+			<realname>ameisez</realname>
+			<username>ameisez</username>
+			<homepage>http://www.littlegraffyx.com/ameisez</homepage>
+			<email>ameisez@yahoo.com</email>
+		</author>
+		<author>
+			<realname>Gabriel</realname>
+			<username>leviatan21</username>
+			<homepage>http://www.mssti.com</homepage>
+			<email>info@mssti.com</email>
+		</author>
+	</author-group>
+	<mod-version>0.0.1</mod-version>
+	<installation>
+		<level>easy</level>
+		<time>300</time>
+		<target-version>3.0.5</target-version>
+	</installation>
+	<history>
+		<entry>
+			<date>2009.09.29</date>
+			<rev-version>0.0.1</rev-version>
+			<changelog lang="en">
+				<change>Beta Release</change>
+			</changelog>
+		</entry>
+	</history>
+</header>
+<action-group>
+	<copy>
+		<file from="root/mplayer/index.php" to="mplayer/index.php" />
+		<file from="root/mplayer/pl_all.php" to="mplayer/pl_all.php" />
+		<file from="root/mplayer/player.swf" to="mplayer/player.swf" />
+		<file from="root/mplayer/swfobject.js" to="mplayer/swfobject.js" />
+		<file from="root/mplayer/video.flv" to="mplayer/video.flv" />
+		<file from="root/mplayer/yt.swf" to="mplayer/yt.flv" />
+		<file from="root/mplayer/media/*.*" to="mplayer/media/[put your media files here]" />
+		<file from="root/language/en/mods/bb3_media_player.php" to="language/en/mods/bb3_media_player.php" />
+		<file from="root/styles/prosilver/template/mplayer_body.html" to="styles/prosilver/template/mplayer_body.html" />
+		<file from="styles/prosilver/theme/images/icon_mplayer.gif" to="prosilver/theme/images/icon_mplayer.gif" />
+	</copy>
+	<open src="language/en/common.php">
+		<edit>
+			<find><![CDATA[	'BAN_TRIGGERED_BY_USER'	=> 'A ban has been issued on your username.',
+]]></find>
+			<action type="after-add"><![CDATA[	//-- mod : BB3 PLAYER ----------------------------------------------------
+	//-- add
+	'BB3_PLAYER'			=> '<a href="mplayer/">BB3 Media Player</a>',
+	'BB3_PLAYER_EXPLAIN'	=> 'BB3 Media Player',
+	//-- fin mod : BB3 PLAYER ------------------------------------------------
+]]></action>
+		</edit>
+	</open>
+	<open src="styles/prosilver/template/overall_footer.html">
+		<edit>
+			<find><![CDATA[	<div class="copyright">Powered by <a href="http://www.phpbb.com/">phpBB</a> &copy; 2000, 2002, 2005, 2007 phpBB Group
+]]></find>
+			<action type="before-add"><![CDATA[   	<div class="copyright">Media Player Powered by <strong><a href="http://www.littlegraffyx.com/ameisez">BB3 Media Player</a></strong> &copy; 2009 <strong><a href="http://www.littlegraffyx.com/ameisez">Ameisez</a></strong>
+]]></action>
+		</edit>
+	</open>
+	<open src="styles/prosilver/template/overall_header.html">
+		<edit>
+			<find><![CDATA[       			<ul class="linklist rightside">
+]]></find>
+			<action type="after-add"><![CDATA[						<li class="icon-player"><a href="{U_BB3_PLAYER}" title="{L_BB3_PLAYER_EXPLAIN}">{L_BB3_PLAYER}</a></li>
+]]></action>
+		</edit>
+	</open>
+	<open src="styles/prosilver/theme/buttons.css">
+		<edit>
+			<find><![CDATA[/* Icon images
+---------------------------------------- */
+.sitehome, .icon-faq, .icon-members, .icon-home, .icon-ucp, .icon-register, .icon-logout,
+]]></find>
+			<inline-edit>
+				<inline-find><![CDATA[.icon-faq, ]]></inline-find>
+			</inline-edit>
+			<action type="before-add"><![CDATA[.icon-player, ]]></action>
+		</edit>
+	</open>
+	<open src="styles/prosilver/theme/colours.css">
+		<edit>
+			<find><![CDATA[/* Icon images
+---------------------------------------- */]]></find>
+			<action type="after-add"><![CDATA[.icon-player                  			{ background-image: url("{T_THEME_PATH}/images/icon_mplayer.gif"); }
+]]></action>
+		</edit>
+	</open>
+	<diy-instructions lang="en"><![CDATA[1. Upload files to your forum.
+2. Purge the template cache from ACP      
+2. Purge the theme cache from ACP      
+3. Enjoy the Mod!!
+]]></diy-instructions>
+</action-group>
+</mod>
