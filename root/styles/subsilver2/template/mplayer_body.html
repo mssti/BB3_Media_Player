@@ -1,0 +1,67 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- MOD : AMEISEZ BB3 MediaPlayer (v0.0.1) - START //-->
+<div id="wrapfooter">
+	<table width="100%" align="center">
+		<tr>
+			<!-- PLAYER EMBEDDING - START //-->
+			<script type="text/javascript" src="swfobject.js"></script>
+			<p id="player"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</p>
+					<script type="text/javascript">
+						var s0 = new SWFObject('player.swf','mpl','900','320','9');
+						s0.addParam('allowscriptaccess','always');
+						s0.addParam('allowfullscreen','true');
+						s0.addVariable('height','3250');
+						s0.addVariable('width','900');
+						s0.addVariable('file','pl_all.php');
+						s0.addVariable('frontcolor','0x1A1A1A');
+						s0.addVariable('lightcolor','0x4682B4');
+						s0.addVariable('screencolor','0x4682B4');
+						s0.addVariable('displaywidth','500');
+						s0.addVariable('displayheight','300');
+						s0.addVariable('searchbar','true');
+						s0.addVariable('playlist','left');
+						s0.addVariable('overstretch','fit');
+						s0.addVariable('showicons','false');
+						s0.addVariable('showeq','true');
+						s0.addVariable('showstop','true');
+						s0.addVariable('autoscroll','false');
+						s0.addVariable('repeat','list');
+						s0.addVariable('image','bb3player_logo.png');
+						s0.addVariable('thumbsinplaylist','false');
+						s0.write('player');
+					</script>
+			<!-- PLAYER EMBEDDING - END //-->
+	<!-- MOD : AMEISEZ BB3 MediaPlayer (v0.0.1) - END //-->
+		</tr>
+	</table>
+</div>
+<div id="pagefooter"></div>
+
+<br clear="all" />
+
+<!-- INCLUDE breadcrumbs.html -->
+
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<br clear="all" />
+
+	<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat"><h4>{L_WHO_IS_ONLINE}</h4></td>
+	</tr>
+	<tr>
+		<td class="row1"><p class="gensmall">{LOGGED_IN_USER_LIST}</p></td>
+	</tr>
+	</table>
+<!-- ENDIF -->
+
+<br clear="all" />
+
+<table width="100%" cellspacing="0">
+<tr>
+	<td><!-- IF S_DISPLAY_SEARCHBOX --><!-- INCLUDE searchbox.html --><!-- ENDIF --></td>
+	<td align="{S_CONTENT_FLOW_END}"><!-- INCLUDE jumpbox.html --></td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->
