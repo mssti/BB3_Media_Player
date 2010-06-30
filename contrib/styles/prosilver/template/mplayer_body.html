@@ -1,0 +1,181 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- MOD : AMEISEZ BB3 MediaPlayer (v0.0.6) - START //-->
+<h2>{L_BB3_PLAYER_NAME}</h2>
+<div class="panel bg3">
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<div class="inner">
+			<!-- PLAYER EMBEDDING - START //-->
+			<div class="postbody" style="text-align: center;">
+				<br />
+				<div id="player">{L_BB3_FLASH_NOTE}</div>
+				<script type="text/javascript" src="{BB3_FOLDER_PATH}swfobject.js"></script>
+				<script type="text/javascript">
+				// <![CDATA[
+					var MyPlaylist = encodeURIComponent('{PLAYLIST}');
+
+					var so = new SWFObject('{BB3_FOLDER_PATH}player_4.4.swf', 'BB3_player_ID', '825', '410', '9.0.124');
+					so.addParam('allowscriptaccess', 'always');
+					so.addParam('allowfullscreen', 'true');
+					so.addParam('wmode', 'opaque');
+
+					so.addVariable('frontcolor', 'ffffff');	// text, buttons, slider
+					so.addVariable('lightcolor', 'ff0000');	// Mouseover, volume
+					so.addVariable('backcolor', '555555');	// background navigation bar, playlist
+					so.addVariable('screencolor', '555555');// background Video, audio
+					so.addVariable('screenalpha', '0');
+
+					so.addVariable('volume', '80');
+					so.addVariable('file', MyPlaylist);
+
+					so.addVariable('playlistsize', '300');
+					so.addVariable('playlist', 'right');
+					so.addVariable('autoscroll', 'true');
+					so.addVariable('playlist.thumbs', 'true'); // so.addVariable('playlist.thumbs', 'false');
+					so.addVariable('repeat', 'list');
+					so.addVariable('bufferlength', '20');
+					so.addVariable('bandwidth', '10000');
+
+				//	so.addVariable('skin', 'stylish_slim');
+					so.addVariable('overstretch', 'fit');
+					so.addVariable('image','{BB3_IMAGE_PATH}');
+					so.addVariable('shownavigation', 'true');
+					so.addVariable('showicons', 'true');
+					so.addVariable('showdigits', 'true');
+					so.addVariable('showstop', 'true');
+					so.addVariable('showdownload', 'true');
+
+					so.addVariable('searchbar', 'true');
+					so.addVariable('showeq', 'true');
+
+					function playerInit()
+					{
+						so.write('player');
+					}
+
+					var player;
+					function playerReady(thePlayer)
+					{
+						player = document.getElementById(thePlayer.id);
+					//	player.addControllerListener('PLAYLIST', 'playlistHandler');
+					}
+					/**
+					function playlistHandler(playlist)
+					{
+						//manipulate playlist here.
+					}
+					**/
+					function youtube_search()
+					{
+						<!-- IF YOUTUBE_SEARCH -->
+						so.addVariable('plugins', 'yousearch-1');
+				  		playerInit();
+				  		<!-- ENDIF -->
+					}
+
+					function playlist_change(name)
+					{
+						switch(name)
+						{
+							case 'myyoutube' :
+								<!-- IF YOUTUBE_MYPLAYLIST -->so.addVariable('file', encodeURIComponent('{YOUTUBE_MYPLAYLIST}'));<!-- ENDIF -->
+								break;
+
+							case 'youtube' :
+								<!-- IF YOUTUBE_PLAYLIST -->so.addVariable('file', encodeURIComponent('{YOUTUBE_PLAYLIST}'));<!-- ENDIF -->
+								break;
+
+							case 'dailymotion' :
+								<!-- IF DAILYMOTION_PLAYLIST -->so.addVariable('file', encodeURIComponent('{BB3_FOLDER_PATH}dailymotion.{PHP_EX}'));<!-- ENDIF -->
+							break;
+
+							case 'google' :
+								<!-- IF GOOGLE_PLAYLIST -->so.addVariable('file',  encodeURIComponent('{BB3_FOLDER_PATH}google.{PHP_EX}'));<!-- ENDIF -->
+								break;
+
+							default :
+								break;
+						}
+						playerInit();
+
+						return true;
+					}
+
+					function skin_factory(name)
+					{
+						so.addVariable('skin','skin/' + name);
+				  		playerInit();
+					}
+
+					/** Install the safety net to initiate the player - START **/
+					if (window.onload_functions) // prosilver
+					{
+						onload_functions[onload_functions.length] = "playerInit();";
+					}
+					else if (typeof(window.addEventListener) != "undefined") // DOM
+					{
+						window.addEventListener("load", playerInit, false);
+					}
+					else if (typeof(window.attachEvent) != "undefined") // MSIE
+					{
+						window.attachEvent("onload", playerInit);
+					}
+					/** Install the safety net to initiate the player - END **/
+				// ]]>
+				</script>
+			</div>
+			<!-- PLAYER EMBEDDING - END //-->
+
+			<form id="bb3_options" method="post" action="{U_ACTION}">
+				<div class="postbody">
+					<hr />
+					<dl>
+						<dt>&nbsp;</dt>
+						<!-- IF BB3_SKIN_OPTIONS -->
+						<dd>
+							<label for="skin">{L_BB3_SKIN_OPTIONS}</label><br />
+							<select id="skin" name="skin" onchange="if (this.options[this.selectedIndex].value != -1){ skin_factory(this.options[selectedIndex].value); } return false;">{BB3_SKIN_OPTIONS}</select>
+						</dd>
+						<!-- ENDIF -->
+						<!-- IF BB3_FOLDER_OPTIONS -->
+						<dd>
+							<label for="path">{L_BB3_PLAYLIST_OPTIONS}</label><br />
+							<select id="path" name="path" onchange="if (this.options[this.selectedIndex].value != -1){ this.form.submit(); }">{BB3_FOLDER_OPTIONS}</select>
+						</dd>
+						<!-- ENDIF -->
+						<!-- IF YOUTUBE_MYPLAYLIST or YOUTUBE_PLAYLIST or DAILYMOTION_PLAYLIST or GOOGLE_PLAYLIST -->
+						<dd>
+							<label for="playlist">{L_BB3_EXPLAYLIST_OPTIONS}</label><br />
+							<select id="playlist" name="playlist" onchange="if (this.options[this.selectedIndex].value != -1){ playlist_change(this.options[selectedIndex].value); } return false;">
+								<option value="-1" selected="selected" class="disabled" disabled="disabled" >{L_SELECT}</option>
+								<!-- IF YOUTUBE_MYPLAYLIST --><option value="myyoutube" >{L_BB3_YOUTUBE_MYPLAYLIST}</option><!-- ENDIF -->
+								<!-- IF YOUTUBE_PLAYLIST --><option value="youtube">{L_BB3_YOUTUBE_RECENT}</option><!-- ENDIF -->
+								<!-- IF DAILYMOTION_PLAYLIST --><option value="dailymotion">{L_BB3_DAILYMOTION_RECENT}</option><!-- ENDIF -->
+								<!-- IF GOOGLE_PLAYLIST --><option value="google">{L_BB3_GOOGLE_RECENT}</option><!-- ENDIF -->
+							</select> 
+						</dd>
+						<!-- ENDIF -->
+						<!-- IF YOUTUBE_SEARCH -->
+						<dd>
+							<br /><input class="button2" type="submit" value="{L_BB3_YOUTUBE_SEARCH}" onclick="javascript:youtube_search(); return false;"/>
+						</dd>
+						<!-- ENDIF -->
+					</dl>
+				</div>
+			</form>
+
+		</div>
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<!-- MOD : AMEISEZ BB3 MediaPlayer (v0.0.6) - END //-->
+
+<!-- INCLUDE jumpbox.html -->
+
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
+	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+	<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
