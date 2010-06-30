@@ -1,0 +1,89 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- MOD : AMEISEZ BB3 MediaPlayer (v0.0.1) - START //-->
+<h2><span class="titles" >{L_BB3_PLAYER_NAME}</span></h2>
+<p>&nbsp;</p>
+<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="row2">
+			<div class="content" style="text-align: center;">
+				<table width="100%" cellpadding="0" cellspacing="5" class="bg_light_grey border_all">
+					<tr>
+						<td>
+			<!-- PLAYER EMBEDDING - START //-->
+			<div id="player"><a href="http://www.macromedia.com/go/getflashplayer">{L_BB3_GET_FLASH}</a> {L_BB3_SEE_FLASH}</div>
+			<script type="text/javascript" src="{BB3_FOLDER_PATH}swfobject.js"></script>
+			<script type="text/javascript">
+				// <![CDATA[
+				//	If your file flashvar is at the location getplaylist.php?id=123&type=flv, you must set the file flashvar to getplaylist.php%3Fid%3D123%26type%3Dflv. 
+					var playlist = '{BB3_FOLDER_PATH}playlist.php?path={BB3_UPLOAD_PATH}&image={BB3_FOLDER_PATH}bb3player_logo.png';
+						playlist = playlist.replace(/\//gi,'%2F');
+						playlist = playlist.replace(/\?/gi,'%3F');
+						playlist = playlist.replace(/\=/gi,'%3D');
+
+					var so = new SWFObject('{BB3_FOLDER_PATH}player.swf','mpl','900','320','9');
+					so.addParam('allowscriptaccess','always');
+					so.addParam('allowfullscreen','true');
+					so.addParam('wmode','opaque');
+					so.addVariable('height','3250');
+					so.addVariable('width','900');
+					so.addVariable('file',playlist);
+					so.addVariable('frontcolor','0x1A1A1A');
+					so.addVariable('lightcolor','0x4682B4');
+					so.addVariable('screencolor','0x4682B4');
+					so.addVariable('displaywidth','500');
+					so.addVariable('displayheight','300');
+					so.addVariable('searchbar','true');
+					so.addVariable('playlist','left');
+					so.addVariable('overstretch','fit');
+					so.addVariable('showicons','false');
+					so.addVariable('showicons','true');
+					so.addVariable('shownavigation','true');
+					so.addVariable('showdigits','true');
+					so.addVariable('showdownload','true');
+					so.addVariable('showeq','true');
+					so.addVariable('showstop','true');
+					so.addVariable('autoscroll','false');
+					so.addVariable('repeat','list');
+					so.addVariable('thumbsinplaylist','false');
+					so.addVariable('volume','80');
+					so.addVariable('image','{BB3_FOLDER_PATH}bb3player_logo.png');
+					so.write('player');
+				// ]]>
+			</script>
+			<!-- PLAYER EMBEDDING - END //-->
+	
+					</td>
+					</tr>
+				</table>
+			</div>
+
+		</td>
+	</tr>
+</table>
+<br clear="all" />
+
+<!-- INCLUDE breadcrumbs.html -->
+
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+<br clear="all" />
+<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat"><h4>{L_WHO_IS_ONLINE}</h4></td>
+	</tr>
+	<tr>
+		<td class="row1"><p class="gensmall">{LOGGED_IN_USER_LIST}</p></td>
+	</tr>
+</table>
+<!-- ENDIF -->
+
+<br clear="all" />
+
+<table width="100%" cellspacing="0">
+	<tr>
+		<td><!-- IF S_DISPLAY_SEARCHBOX --><!-- INCLUDE searchbox.html --><!-- ENDIF --></td>
+		<td align="{S_CONTENT_FLOW_END}"><!-- INCLUDE jumpbox.html --></td>
+	</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->
